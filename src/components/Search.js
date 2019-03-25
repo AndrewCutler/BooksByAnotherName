@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BookCard from './BookCard'
 
 export default class Search extends Component {
   constructor() {
@@ -18,7 +19,7 @@ export default class Search extends Component {
 
   //get search results
   getResults() {
-    fetch(`http://openlibrary.org/search.json?q=${this.state.searchTerm}`)
+    fetch(`http://openlibrary.org/search.json?title=${this.state.searchTerm}`)
       .then(res => res.json())
       .then(data =>
         this.setState({
@@ -27,6 +28,7 @@ export default class Search extends Component {
       )
   }
 
+  //event handlers
   handleChange = e => {
     e.preventDefault()
 
@@ -37,10 +39,18 @@ export default class Search extends Component {
     e.preventDefault()
 
     this.getResults()
-    console.log(this.state.results)
   }
 
   render() {
+    let booksDisplay = []
+    if (this.state.results.length > 0) {
+      for (let i = 0; i < 5; i++) {
+        booksDisplay.push(
+          <BookCard results={this.state.results} index={i} key={i} />
+        )
+      }
+    }
+
     return (
       <div>
         <form>
@@ -49,6 +59,7 @@ export default class Search extends Component {
             Search
           </button>
         </form>
+        {booksDisplay}
       </div>
     )
   }
