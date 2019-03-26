@@ -9,7 +9,9 @@ const Types = {
 const itemSource = {
   beginDrag(props) {
     //which of these, if either, is valid?
-    return { title: this.title, author: props.results[0].author_name[0] }
+    // return { title: this.title, author: props.results[0].author_name[0] }
+    const item = { title: this.title, propTitle: props.results[0].title }
+    return item
   }
 }
 
@@ -33,7 +35,8 @@ class BookCard extends Component {
       : nocover
     const title = book[index].title
     const author = book[index].author_name[0]
-    const { isDragging, connectDragSource, src } = this.props
+
+    const { isDragging, connectDragSource } = this.props
 
     return connectDragSource(
       <div className='row'>

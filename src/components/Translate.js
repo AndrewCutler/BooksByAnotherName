@@ -5,6 +5,12 @@ const Types = {
   ITEM: 'book'
 }
 
+const bookDrop = {
+  hover(props, monitor, component) {
+    console.log(props)
+  }
+}
+
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget()
@@ -39,4 +45,4 @@ class Translate extends Component {
   }
 }
 
-export default DropTarget(Types.ITEM, {}, collect)(Translate)
+export default DropTarget(Types.ITEM, bookDrop, collect)(Translate)
