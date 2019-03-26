@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import './App.css'
 import Search from './components/Search'
+import Translate from './components/Translate'
 
 class App extends Component {
   render() {
     return (
-      <div className='App'>
-        Main
+      <div className='container'>
         <Search />
+        <Translate />
       </div>
     )
   }

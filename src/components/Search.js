@@ -52,12 +52,22 @@ export default class Search extends Component {
     }
 
     return (
-      <div>
+      <div style={{ margin: 'auto' }}>
         <form>
-          <input value={this.state.searchTerm} onChange={this.handleChange} />
-          <button type='submit' onClick={this.handleSubmit}>
-            Search
-          </button>
+          <div className='input-field'>
+            <input
+              type='text'
+              value={this.state.searchTerm}
+              onChange={this.handleChange}
+            />
+            <button
+              className='btn waves-effect waves-light light-blue'
+              type='submit'
+              onClick={this.handleSubmit}
+            >
+              Search
+            </button>
+          </div>
         </form>
         {booksDisplay}
       </div>
