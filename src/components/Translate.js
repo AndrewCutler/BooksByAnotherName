@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
+import { DropTarget } from 'react-dnd'
 
-export default class Translate extends Component {
+const Types = {
+  ITEM: 'book'
+}
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget()
+  }
+}
+
+class Translate extends Component {
   constructor() {
     super()
     this.state = {
@@ -17,17 +28,15 @@ export default class Translate extends Component {
   }
 
   render() {
-    return (
+    const { connectDropTarget } = this.props
+
+    return connectDropTarget(
       <div className='container'>
         <h4>Let's translate books back and forth!</h4>
-        <form>
-          <input
-            type='text'
-            value={this.state.title}
-            onChange={this.handleChange}
-          />
-        </form>
+        <div className='dropbox' />
       </div>
     )
   }
 }
+
+export default DropTarget(Types.ITEM, {}, collect)(Translate)

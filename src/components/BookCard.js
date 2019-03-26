@@ -1,7 +1,26 @@
 import React, { Component } from 'react'
 import nocover from './assets/nocover.png'
+import { DragSource } from 'react-dnd'
 
-export default class BookCard extends Component {
+const Types = {
+  ITEM: 'book'
+}
+
+const itemSource = {
+  beginDrag(props) {
+    //which of these, if either, is valid?
+    return { title: this.title, author: props.results[0].author_name[0] }
+  }
+}
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
+class BookCard extends Component {
   constructor(props) {
     super(props)
   }
@@ -14,8 +33,9 @@ export default class BookCard extends Component {
       : nocover
     const title = book[index].title
     const author = book[index].author_name[0]
+    const { isDragging, connectDragSource, src } = this.props
 
-    return (
+    return connectDragSource(
       <div className='row'>
         <div className='col s12'>
           <div className='card'>
@@ -33,3 +53,5 @@ export default class BookCard extends Component {
     )
   }
 }
+
+export default DragSource(Types.ITEM, itemSource, collect)(BookCard)
