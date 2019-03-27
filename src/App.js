@@ -6,9 +6,6 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 class App extends Component {
-  constructor() {
-    super()
-  }
   render() {
     return (
       <div className='container'>
