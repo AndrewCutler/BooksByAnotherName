@@ -6,14 +6,15 @@ const Types = {
 }
 
 const bookDrop = {
-  hover(props, monitor, component) {
-    console.log(props)
+  hover(props, monitor) {
+    console.log(props.id)
   }
 }
 
 function collect(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver()
   }
 }
 

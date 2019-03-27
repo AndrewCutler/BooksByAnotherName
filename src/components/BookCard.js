@@ -10,7 +10,7 @@ const itemSource = {
   beginDrag(props) {
     //which of these, if either, is valid?
     // return { title: this.title, author: props.results[0].author_name[0] }
-    const item = { title: this.title, propTitle: props.results[0].title }
+    const item = { title: this.title, propTitle: props.results[0].title, id: 1 }
     return item
   }
 }
@@ -23,31 +23,31 @@ function collect(connect, monitor) {
 }
 
 class BookCard extends Component {
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   render() {
-    const book = this.props.results
-    const index = this.props.index
-    const cover = book[index].cover_i
-      ? `https://covers.openlibrary.org/w/id/${book[index].cover_i}-L.jpg`
+    // const book = this.props.results
+    // const index = this.props.index
+    const cover = this.props.cover
+      ? `https://covers.openlibrary.org/w/id/${this.props.cover}-L.jpg`
       : nocover
-    const title = book[index].title
-    const author = book[index].author_name[0]
+    // const title = book[index].title
+    // const author = book[index].author_name[0] //breaks sometimes, e.g. search '2984'
 
     const { isDragging, connectDragSource } = this.props
 
     return connectDragSource(
-      <div className='row'>
+      <div className='row' style={{ opacity: isDragging ? 0.5 : 1 }}>
         <div className='col s12'>
           <div className='card'>
             <div className='card-image'>
-              <img src={cover} alt={book[index].title} />
+              <img src={cover} alt={this.props.title} />
 
               <div>
-                <h4>{title}</h4>
-                <span>{author}</span>
+                <h4>{this.props.title}</h4>
+                <span>{this.props.author}</span>
               </div>
             </div>
           </div>

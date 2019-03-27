@@ -46,7 +46,14 @@ export default class Search extends Component {
     if (this.state.results.length > 0) {
       for (let i = 0; i < 5; i++) {
         booksDisplay.push(
-          <BookCard results={this.state.results} index={i} key={i} />
+          <BookCard
+            cover={this.state.results[i].cover_i}
+            title={this.state.results[i].title}
+            author={this.state.results[i].author_name[0]}
+            results={this.state.results}
+            index={i}
+            key={i}
+          />
         )
       }
     }
