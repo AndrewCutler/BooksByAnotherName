@@ -6,11 +6,11 @@ const Types = {
   ITEM: 'book'
 }
 
-const itemSource = {
+const bookSource = {
   beginDrag(props) {
     //which of these, if either, is valid?
     // return { title: this.title, author: props.results[0].author_name[0] }
-    const item = { title: this.title, propTitle: props.results[0].title, id: 1 }
+    const item = { title: props.title, id: props.index }
     return item
   }
 }
@@ -23,19 +23,10 @@ function collect(connect, monitor) {
 }
 
 class BookCard extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
-
   render() {
-    // const book = this.props.results
-    // const index = this.props.index
     const cover = this.props.cover
       ? `https://covers.openlibrary.org/w/id/${this.props.cover}-L.jpg`
       : nocover
-    // const title = book[index].title
-    // const author = book[index].author_name[0] //breaks sometimes, e.g. search '2984'
-
     const { isDragging, connectDragSource } = this.props
 
     return connectDragSource(
@@ -57,4 +48,4 @@ class BookCard extends Component {
   }
 }
 
-export default DragSource(Types.ITEM, itemSource, collect)(BookCard)
+export default DragSource(Types.ITEM, bookSource, collect)(BookCard)

@@ -6,11 +6,20 @@ import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 
 class App extends Component {
+  constructor() {
+    super()
+  }
   render() {
     return (
       <div className='container'>
-        <Search />
-        <Translate />
+        <div className='row'>
+          <div className='col s6'>
+            <Search />
+          </div>
+          <div className='col s6'>
+            <Translate />
+          </div>
+        </div>
       </div>
     )
   }

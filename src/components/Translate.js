@@ -7,7 +7,8 @@ const Types = {
 
 const bookDrop = {
   hover(props, monitor) {
-    console.log(props.id)
+    const book = monitor.getItem()
+    console.log(book)
   }
 }
 
@@ -19,8 +20,8 @@ function collect(connect, monitor) {
 }
 
 class Translate extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       title: ''
     }
@@ -35,7 +36,7 @@ class Translate extends Component {
   }
 
   render() {
-    const { connectDropTarget } = this.props
+    const { isOver, connectDropTarget } = this.props
 
     return connectDropTarget(
       <div className='container'>
