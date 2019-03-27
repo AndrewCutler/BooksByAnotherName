@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BookCard from './BookCard'
+import throbber from './assets/throbber.gif'
 
 export default class Search extends Component {
   constructor() {
@@ -8,6 +9,7 @@ export default class Search extends Component {
     this.state = {
       results: [],
       searchTerm: '',
+      loading: false,
       errors: {}
     }
   }
@@ -39,6 +41,7 @@ export default class Search extends Component {
     e.preventDefault()
 
     this.getResults()
+    this.setState({ loading: true })
   }
 
   render() {
@@ -76,7 +79,13 @@ export default class Search extends Component {
             </button>
           </div>
         </form>
-        {booksDisplay}
+        {this.state.loading && booksDisplay.length === 0 ? (
+          <div>
+            <img gotsrc={throbber} />
+          </div>
+        ) : (
+          booksDisplay
+        )}
       </div>
     )
   }
